@@ -10,6 +10,7 @@ public class ExceptionModel {
 	@JsonIgnore
 	HttpStatus status;
 
+
 	public ExceptionModel(String msg, String code, HttpStatus status) {
 		super();
 		this.msg = msg;
