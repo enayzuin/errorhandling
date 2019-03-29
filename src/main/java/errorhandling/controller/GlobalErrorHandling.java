@@ -5,32 +5,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import errorhandling.config.ConfigProperties;
 import errorhandling.constants.ErrorConstants;
 import errorhandling.domain.ExceptionModel;
 import errorhandling.exception.AuthorizationException;
 import errorhandling.exception.BadRequestException;
 import errorhandling.exception.GenericException;
+import errorhandling.responsebuilder.ResponseBuilder;
 
 @ControllerAdvice
-public class GlobalErroHandling {
+public class GlobalErrorHandling {
 
 	@Autowired
-	ConfigProperties properties;
+	ResponseBuilder responseBuilder;
 
 	@ExceptionHandler(GenericException.class)
 	public ResponseEntity<ExceptionModel> handlingGenericException(GenericException e) {
-		return properties.buildResponse(ErrorConstants.GENERIC_ERROR);
+		return responseBuilder.buildMessage(ErrorConstants.GENERIC_ERROR);
 	}
 
 	@ExceptionHandler(AuthorizationException.class)
 	public ResponseEntity<ExceptionModel> handlingAuthorizationException(AuthorizationException e) {
-		return properties.buildResponse(ErrorConstants.AUTH_ERROR);
+		return responseBuilder.buildMessage(ErrorConstants.AUTH_ERROR);
 	}
 
 	@ExceptionHandler(BadRequestException.class)
 	public ResponseEntity<ExceptionModel> handlingBadRequest(BadRequestException e) {
-		return properties.buildResponse(ErrorConstants.BAD_ERROR);
+		return responseBuilder.buildMessage(ErrorConstants.BAD_ERROR);
 	}
 
 }

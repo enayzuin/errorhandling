@@ -16,9 +16,7 @@ public class ConfigProperties {
 	@Autowired
 	private Environment env;
 
-	public ResponseEntity<ExceptionModel> buildResponse(ExceptionModel model) {
-		String confMessage = env.getProperty(model.getMsg());
-		model.setMsg(confMessage);
-		return new ResponseEntity<ExceptionModel>(model, model.getStatus());
+	public String getModelProperty(ExceptionModel model) {
+		return env.getProperty(model.getMsg());
 	}
 }
